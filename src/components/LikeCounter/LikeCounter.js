@@ -1,34 +1,43 @@
-import './LikeCounter.css';
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import "./LikeCounter.css";
 
+function LikeCounter({ title, description, count, color }) {
+  const [likes, setLikes] = useState(parseInt(count));
+  const counterStyles = {
+    color: likes > 5 ? "red" : "black",
+  };
 
-function LikeCounter() {
-    const [likes, setLikes] = useState(0);
-    const handClick = () => {
-       setLikes(likes + 1);
-    };
-    const handClick1 = () => {
-        if (likes == 0) return;
-       setLikes(likes - 1);
-    };
+  useEffect(() => {
+    console.log("use effect odpalony");
+    document.title = `${likes} lików dla posta`;
+  }, [likes]);
 
-    const counterStyles = {
-        color: likes > 5 ? 'red' : 'black',
-        fontWeight: likes > 5 ? 'bold' : 'normal',
-        textAlign: "center"
+  useEffect(() => {
+    console.log("to sie uruchomi tylko raz");
+  }, []);
 
-    };
+  const handleLike = () => {
+    setLikes(likes + 1);
+  };
 
-    return (
-        <div className='post'>
-            <p style={counterStyles}>Liczba lajków {likes}</p>
-            <div className='actions'>
-                <button onClick={handClick} style={{ marginRight: "10px" }}>❤️ Polub</button>
-                <button onClick={handClick1}>👎 Usuń lajka</button>
-            </div>
-            
-        </div>
-    );
-};
+  const handleDislike = () => {
+    if (likes < 1) {
+      return;
+    }
+    setLikes(likes - 1);
+  };
+
+  return (
+    <div className="post" style={{ backgroundColor: color }}>
+      <p style={counterStyles}>Liczba lików {likes}</p>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <div className="actions">
+        <button onClick={handleLike}>Polub 👍</button>
+        <button onClick={handleDislike}>Dislike 👎</button>
+      </div>
+    </div>
+  );
+}
 
 export default LikeCounter;

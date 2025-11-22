@@ -1,5 +1,27 @@
+body {
+  margin: 0;
+  margin-top: 120px;
+  height: 100vh;
+}
+
 .posts {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#root {
+  height: 100%;
+}
+
+.light {
+  background-color: rgb(218, 241, 213);
+  color: black;
+  height: 100%;
+}
+
+.dark {
+  background-color: #6e6e6e;
+  color: rgb(235, 108, 108);
+  height: 100%;
 }
